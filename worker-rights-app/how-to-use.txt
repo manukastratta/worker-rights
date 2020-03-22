@@ -1,0 +1,12 @@
+How to use
+---------
+
+You can navigate into them in your command prompt/ terminal (via the "cd" command) and run
+- npm install
+- npm start
+Instructions for expo:
+https://expo.io/learn
+
+step 0: npm install expo-cli --global
+
+to launch project: expo start
