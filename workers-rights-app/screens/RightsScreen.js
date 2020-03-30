@@ -3,6 +3,7 @@ import { View, Text, StyleSheet, Button, FlatList, Touchable, TouchableOpacity, 
 import { RIGHTSCATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
 import RightsCategoryTile from '../components/RightsCategoryTile';
+import Modal from 'react-native-modal';
 
 var globalProps = null
 
@@ -21,6 +22,13 @@ const RightsScreen = props => {
     return(
         <View style={styles.screen}>
             <FlatList data={RIGHTSCATEGORIES} renderItem={renderGridItem} numColumns={2} />
+
+            <Modal isVisible={false}>
+                <View style={styles.modalStyle}>
+                <Text>I am the modal content!</Text>
+                </View>
+            </Modal>
+
         </View>
     );
 };
@@ -42,6 +50,14 @@ const styles = StyleSheet.create({
         flex: 1,
         alignItems: 'center',
         margin: 10
+    },
+    modalStyle: {
+        backgroundColor: 'white',
+        width: '80%',
+        height: '65%',
+        alignItems: 'center',
+        justifyContent: 'center',
+        margin: '10%'
     }
 })
 
