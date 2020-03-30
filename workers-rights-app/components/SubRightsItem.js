@@ -6,7 +6,7 @@ const SubRightsItem = props => {
     return(
         <TouchableOpacity onPress={props.onSelect} style={styles.subrights}>
             <View style={styles.txtContainer}>
-                <Text style = {styles.subrightstxt}>💵</Text>
+                <Text style = {styles.subrightstxt}>{props.emoji}</Text>
                 <Text style = {styles.subrightstxt} >{props.title}</Text>
                 <Text style = {styles.subrightstxt}>→</Text>
             </View>
