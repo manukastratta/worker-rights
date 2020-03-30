@@ -1,16 +1,32 @@
 import React from 'react';
-import { View, Text, StyleSheet, Button} from 'react-native';
-import { RIGHTSCATEGORIES } from '../data/dummy-data'; 
+import { View, Text, StyleSheet, Button, FlatList} from 'react-native';
+import { RIGHTSCATEGORIES, SUBRIGHTS } from '../data/dummy-data'; 
+import SubRightsItem from '../components/SubRightsItem';
 
 const SubRightsScreen = props => {
     // Get the rights category that we passed in with navigation (eg. "Getting Paid")
     const catId = props.navigation.getParam('categoryId');
     const selectedCategory = RIGHTSCATEGORIES.find(cat => cat.id == catId);
+    const displayedSubRights = SUBRIGHTS.filter(
+        subright => subright.categoryIds.indexOf(catId) >= 0
+    );
+
+    const renderSubright = itemData => {
+        return(
+            <SubRightsItem title={itemData.item.title} onSelect={() => {
+                props.navigation.navigate({routeName: 'RightsDetails'});
+            }}/>
+        );
+    };
 
     return(
         <View style={styles.screen}>
-            <Text>The Sub Rights Screen!</Text>
-            <Text>{selectedCategory.title}</Text>
+            <FlatList
+                data={displayedSubRights}
+                renderItem={renderSubright}
+                numColumns={1}
+                style={{width: '95%'}}
+            />
             <Button title="Go to Rights Details Rights" onPress={() => {
                 props.navigation.navigate({routeName: 'RightsDetails' });
             }} />
@@ -32,7 +48,6 @@ SubRightsScreen.navigationOptions = (navigationData) => {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: 'center',
         alignItems: 'center'
     }
 })
