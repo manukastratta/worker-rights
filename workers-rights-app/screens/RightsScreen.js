@@ -2,27 +2,26 @@ import React from 'react';
 import { View, Text, StyleSheet, Button, FlatList, Touchable, TouchableOpacity, Platform} from 'react-native';
 import { RIGHTSCATEGORIES } from '../data/dummy-data';
 import Colors from '../constants/Colors';
+import RightsCategoryTile from '../components/RightsCategoryTile';
 
 var globalProps = null
 
 const renderGridItem = (itemData) => {
     return (
-    <TouchableOpacity style={styles.gridItem} onPress={() => {
-        globalProps.navigation.navigate({routeName: 'SubRights', params: {
-            categoryId: itemData.item.id // sending the rights category to the new screen
-        }});
-    }}>
-        <View>
-            <Text>{itemData.item.title}</Text>
-        </View>
-    </TouchableOpacity>
-    )
+        <RightsCategoryTile title={itemData.item.title} onSelect={() => {
+            globalProps.navigation.navigate({routeName: 'SubRights', params: {
+                categoryId: itemData.item.id // sending the rights category to the new screen
+            }});
+        }} />
+        )
 };
 
 const RightsScreen = props => {
     globalProps = props
     return(
-        <FlatList data={RIGHTSCATEGORIES} renderItem={renderGridItem} numColumns={2} />
+        <View style={styles.screen}>
+            <FlatList data={RIGHTSCATEGORIES} renderItem={renderGridItem} numColumns={2} />
+        </View>
     );
 };
 
@@ -41,13 +40,8 @@ RightsScreen.navigationOptions = {
 const styles = StyleSheet.create({
     screen: {
         flex: 1,
-        justifyContent: 'center',
-        alignItems: 'center'
-    },
-    gridItem: {
-        flex: 1, // take up as much space as possible
-        margin: 15,
-        height: 150
+        alignItems: 'center',
+        margin: 10
     }
 })
 
